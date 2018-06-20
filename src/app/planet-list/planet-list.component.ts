@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Planet } from '../domain/planet';
 import { StarWarsService } from '../services/star-wars.service';
 
@@ -7,17 +7,26 @@ import { StarWarsService } from '../services/star-wars.service';
   templateUrl: './planet-list.component.html',
   styleUrls: ['./planet-list.component.css']
 })
-export class PlanetListComponent implements OnInit {
+export class PlanetListComponent implements OnInit, OnChanges {
   planets: Planet[];
   error: string;
+
+  @Input() search: string;
 
   constructor(private stService: StarWarsService) { }
 
   ngOnInit() {
-    this.stService.getPlanets().subscribe(
-       data => this.onData(data),
-       error => this.onError(error)
-    );
+    this.loadData();
+  }
+  ngOnChanges() {
+    this.loadData();
+  }
+
+  loadData() {
+    this.stService.getPlanets(this.search).subscribe(
+      data => this.onData(data),
+      error => this.onError(error)
+   );
   }
 
   private onData(d1: Planet[]): void {
