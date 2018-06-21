@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod --aot --source-map=false",
     "test": "ng test --watch=false --code-coverage",
     "test:tdd": "ng test",
     "lint": "ng lint",
