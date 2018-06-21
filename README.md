@@ -35,3 +35,4 @@ Hacer una Aplicacion Web que implemente:
 <button (click)="onSearch()">Buscar</button>
 ´´´
  
+## Added travis for Continous Integration
